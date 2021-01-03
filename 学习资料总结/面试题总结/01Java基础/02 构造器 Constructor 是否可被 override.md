@@ -1,0 +1,1 @@
+Constructor 不能被 override（重写）,但是可以 overload（重载）,所以你可以看到⼀个类中有多个 构造函数的情况。 

@@ -1,0 +1,3 @@
+git remote add origin git@github.com:itcast888/mytest.git
+
+git push -u origin master

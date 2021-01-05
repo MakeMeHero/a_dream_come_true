@@ -1,0 +1,1 @@
+当你把对象加⼊ HashSet 时，HashSet会先计算对象的 hashcode 值来判断对象加⼊的位置，同时也会 与其他加⼊的对象的hashcode值作⽐᫾，如果没有相符的hashcode，HashSet会假设对象没有重复出 现。但是如果发现有相同hashcode值的对象，这时会调⽤ equals（） ⽅法来检查hashcode相等的对 象是否真的相同。如果两者相同，HashSet就不会让加⼊操作成功。 

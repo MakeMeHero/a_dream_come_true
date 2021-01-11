@@ -12,4 +12,4 @@ SpringMVC流程：
 10、DispatcherServlet根据View进行渲染视图（即将模型数据填充至视图中）。
 11、DispatcherServlet响应用户。
 
-![](E:\学习资料总结\MS题总结\10springmvc\assets/QQ截图20210108205302.png)
+![](assets/QQ截图20210108205302.png)

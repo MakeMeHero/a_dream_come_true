@@ -56,7 +56,7 @@ HashMap 具有线程安全的能力，或者使用 ConcurrentHashMap。我们用
 
 HashMap 的结构。
 
-![img](E:\学习资料总结\面试题总结\02集合\assets/777.png)
+![img](assets/777.png)
 
 大方向上，HashMap 里面是一个数组，然后数组中每个元素是一个单向链表。上图中，每个绿色
 
@@ -90,7 +90,7 @@ Java8 对 HashMap 进行了一些修改，最大的不同就是利用了红黑�
 
 会将链表转换为红黑树，在这些位置进行查找的时候可以降低时间复杂度为 O(logN)。
 
-![img](E:\学习资料总结\面试题总结\02集合\assets/888.png)
+![img](assets/888.png)
 
 put() 方法
 

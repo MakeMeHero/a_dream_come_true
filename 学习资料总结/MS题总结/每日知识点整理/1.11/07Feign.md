@@ -69,7 +69,7 @@ feign整合Hystrix熔断器
 
 Feign默认也有对Hystrix的集成!
 
-![1563263001726](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563263001726.png)
+![1563263001726](E:/daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563263001726.png)
 
 实现步骤：
 
@@ -120,7 +120,7 @@ public class UserClientFallback implements UserClient{
 
 在@FeignClient注解中，指定FallBack处理类
 
-![1563263626561](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563263626561.png)
+![1563263626561](assets/1563263626561.png)
 
 #### 1.2.6 Feign的日志级别配置
 
@@ -185,5 +185,14 @@ Feign支持4中级别：
 
 修改`user-consumer`的`com.itheima.feign.UserClient`指定上面的配置类，代码如下：
 
-![1563267991954](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563267991954.png)
+![1563267991954](assets/1563267991954.png)
+
+解释：
+
+```properties
+Feign会通过动态代理，帮我们生成实现类。
+注解@FeignClient声明Feign的客户端，注解value指明服务名称
+接口定义的方法，采用SpringMVC的注解。Feign会根据注解帮我们生成URL地址
+注解@RequestMapping中的/user，不要忘记。因为Feign需要拼接可访问地址
+```
 

@@ -1,3 +1,53 @@
+# 骨干
+
+==网关作用：为微服务提供统一的路由管理，可以在路由管理基础上进行一系列的过滤，可以做一系列的监控操作，限流。==
+
+##动态路由
+
+​          .#lb协议表示从Eureka注册中心获取服务请求地址
+          #user-provider访问的服务名称。
+          #路由地址如果通过lb协议加服务名称时，会自动使用负载均衡访问对应服务
+          uri: lb://user-provider
+
+**根据服务名称**，去Eureka注册中心查找服务对应的所有实例列表，然后进行动态路由！
+
+## 过滤器
+
+##### 2.2.5.1 过滤器的分类
+
+```properties
+默认过滤器：出厂自带，实现好了拿来就用，不需要实现
+  全局默认过滤器
+  局部默认过滤器
+自定义过滤器：根据需求自己实现，实现后需配置，然后才能用哦。
+  全局过滤器：作用在所有路由上。
+  局部过滤器：配置在具体路由下，只作用在当前路由上。
+```
+
+##### 2.2.5.2 默认过滤器配置
+
+默认过滤器有两个：全局默认过滤器和局部默认过滤器。
+
+**全局过滤器：对输出响应头设置属性**
+
+对输出的响应设置其头部属性名称为X-Response-Default-MyName,值为itheima
+
+**局部过滤器：**通过局部默认过滤器，修改请求路径。局部过滤器在这里介绍两种：添加路径前缀、去除路径前缀。
+
+**第一：添加路径前缀：**
+
+**第二：去除路径前缀：**
+
+**全局过滤器自定义：**
+
+创建一个类 implements GlobalFilter, Ordered  重写filter与order  方法 在filter放行
+
+**局部过滤器自定义：**
+
+创建一个类extends AbstractNameValueGatewayFilterFactory  重写filter  放行
+
+# ------------------------------
+
 ==网关作用：为微服务提供统一的路由管理，可以在路由管理基础上进行一系列的过滤，可以做一系列的监控操作，限流。==
 
 #### 2.2.1 Gateway 简介
@@ -18,7 +68,7 @@ Spring Cloud Gateway 作为SpringCloud生态系统中的网关，目标是替代
 
 #### 2.2.3 路由配置
 
-![1563269396043](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563269396043.png)
+![1563269396043](assets/1563269396043.png)
 
 通过网关配置一个路由功能，用户访问网关的时候,如果用户请求的路径是以`/user`开始，则路由到`user-provider`服务去,修改application.yml配置即可实现，配置如下：
 
@@ -41,7 +91,7 @@ spring:
 
 #### 2.2.4 动态路由
 
-![1563270055671](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563270055671.png)
+![1563270055671](assets/1563270055671.png)
 
 刚才路由规则中，我们把路径对应服务地址写死了！如果服务提供者集群的话，这样做不合理。应该是**根据服务名称**，去Eureka注册中心查找服务对应的所有实例列表，然后进行动态路由！
 
@@ -51,7 +101,7 @@ spring:
 
 因为已经配置了Eureka客户端，可以从Eureka获取服务的地址信息，修改application.yml文件如下:
 
-![1563270306529](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563270306529.png)
+![1563270306529](assets/1563270306529.png)
 
 上图代码如下：
 
@@ -119,7 +169,7 @@ spring:
 
 查看浏览器响应头信息!
 
-![1563271202588](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563271202588.png)
+![1563271202588](assets/1563271202588.png)
 
 
 
@@ -131,7 +181,7 @@ spring:
 
 配置请求地址添加路径前缀过滤器
 
-![1563271983446](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563271983446.png)
+![1563271983446](assets/1563271983446.png)
 
 上图配置如下：
 
@@ -175,7 +225,7 @@ spring:
 
 配置去除路径前缀过滤器
 
-![1563272403821](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563272403821.png)
+![1563272403821](assets/1563272403821.png)
 
 上图配置如下：
 
@@ -288,7 +338,7 @@ public class LoginGlobalFilter implements GlobalFilter, Ordered {
 
 测试：不携带token  `<http://localhost:18084/api/user/find/2>`效果如下：
 
-![1563273974252](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563273974252.png)
+![1563273974252](assets/1563273974252.png)
 
 测试：携带token `<http://localhost:18084/api/user/find/2?token=abc>` 此时可以正常访问。
 
@@ -347,7 +397,7 @@ public class MyParamGatewayFilterFactory extends AbstractNameValueGatewayFilterF
 
 修改application.yml配置文件
 
-![1568970734136](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1568970734136.png)
+![1568970734136](assets/1568970734136.png)
 
 
 

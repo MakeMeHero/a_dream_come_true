@@ -22,7 +22,7 @@ Bus可以为微服务做监控，也可以实现应用程序之间互相通信�
 
 修改`config-server`的application.yml，如下配置的rabbit都是默认值，其实可以完全不配置,代码如下：
 
-![1563277655450](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563277655450.png)
+![1563277655450](assets/1563277655450.png)
 
 上图配置如下：
 
@@ -136,7 +136,7 @@ eureka:
 
 修改`user-provider`的`com.itheima.controller.LoadConfigController`，添加一个`@RefreshScope`注解刷新配置信息，代码如下：
 
-![1563278214919](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563278214919.png)
+![1563278214919](assets/1563278214919.png)
 
 @RefreshScope：用于启用刷新配置文件的信息。
 
@@ -144,7 +144,7 @@ eureka:
 
 使用Postman以POST方式请求`http://localhost:18085/actuator/bus-refresh`
 
-![1563278498743](../../../daybyday/02Web/day70%20SpringCloud/%E8%AE%B2%E4%B9%89/images/1563278498743.png)
+![1563278498743](assets/1563278498743.png)
 
 请求地址中actuator是固定的，bus-refresh对应的是配置中心的config-server中的application.yml文件的配置项include的内容
 
